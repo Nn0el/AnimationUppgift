@@ -1,14 +1,46 @@
+import com.sun.org.apache.regexp.internal.RE;
+import sun.font.TrueTypeGlyphMapper;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 
 public class AnimationUppgift extends Canvas implements Runnable{
     private BufferStrategy bs;
 
     private boolean running = false;
     private Thread thread;
+    int x = 0;
+    int y = 0;
+    Rectangle wall = new Rectangle(225,175,160,80);
+    private BufferedImage Haunt;
+    private int HauntX = 100;
+    private int HauntY = 100;
+    private int HauntVX = 0;
+    private int HauntVY = 0;
 
+    public Grafik() {
+        try {
+            Haunt = ImageIO.read(new File("PixelHaunter.png"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setSize(600,400);
+        JFrame frame = new JFrame();
+        frame.add(this);
+        frame.addKeyListener(new MyKeyListener());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
     public AnimationUppgift() {
         setSize(600,400);
         JFrame frame = new JFrame();
@@ -21,6 +53,7 @@ public class AnimationUppgift extends Canvas implements Runnable{
         frame.pack();
         frame.setVisible(true);
     }
+
 
     public void render() {
         bs = getBufferStrategy();
@@ -37,8 +70,17 @@ public class AnimationUppgift extends Canvas implements Runnable{
         bs.show();
     }
 
+
+
+
     public void draw(Graphics g) {
         g.clearRect(0,0,getWidth(),getHeight());
+        g.fillRect(0 ,0 ,600,60);
+        g.fillRect(0,350, 600,  60);
+        g.fillRect(0,0,60,350);
+        g.fillRect(540,0,60,350);
+        g.fillRect(225,175,160,80);
+        g.drawImage(Haunt, HauntX, HauntY, Haunt.getWidth()/4, Haunt.getHeight()/4, null);
     }
 
     private void update() {
@@ -84,6 +126,9 @@ public class AnimationUppgift extends Canvas implements Runnable{
         }
         stop();
     }
+    private void update() {
+        HauntX += HauntVX;
+        HauntY += HauntVY;
 
     public class MyMouseMotionListener implements MouseMotionListener {
 
