@@ -8,3 +8,6 @@ tills spöket närmar sig och kommer sedan springa en stund och sedan stå still
 2023-02-14 Skapat själva "kartan"  och fixat en hitbox 
 i mitten. Jag har börjat på att lägga in spöket som man 
 kommer styra men är inte riktigt klar med den än. 
+
+2023-02-17 Fixat errors och lagt in spöket och har börjat på koden som
+får spöket att kunna röra sig
