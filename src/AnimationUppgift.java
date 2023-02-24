@@ -1,6 +1,5 @@
 import com.sun.org.apache.regexp.internal.RE;
 import sun.font.TrueTypeGlyphMapper;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -27,22 +26,7 @@ public class AnimationUppgift extends Canvas implements Runnable {
     private int HauntVX = 0;
     private int HauntVY = 0;
 
-    /*public Grafik() {
-        try {
-            Haunt = ImageIO.read(new File("PixelHaunter.png"));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        setSize(600, 400);
-        JFrame frame = new JFrame();
-        frame.add(this);
-        frame.addKeyListener(new MyKeyListener());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }*/
+
 
     public AnimationUppgift() {
         try {
@@ -84,12 +68,13 @@ public class AnimationUppgift extends Canvas implements Runnable {
 
     public void draw(Graphics g) {
         g.clearRect(0, 0, getWidth(), getHeight());
+        g.clearRect(Haunt, HauntX, HauntY, Haunt.getWidth()/8, Haunt.getHeight()/8, );
         g.fillRect(0, 0, 600, 60);
         g.fillRect(0, 350, 600, 60);
         g.fillRect(0, 0, 60, 350);
         g.fillRect(540, 0, 60, 350);
         g.fillRect(225, 175, 160, 80);
-        g.drawImage(Haunt, HauntX, HauntY, Haunt.getWidth() / 4, Haunt.getHeight() / 4, null);
+        g.drawImage(Haunt, HauntX, HauntY, Haunt.getWidth() / 8, Haunt.getHeight() / 8, null);
     }
 
 
@@ -138,6 +123,7 @@ public class AnimationUppgift extends Canvas implements Runnable {
     private void update() {
         HauntX += HauntVX;
         HauntY += HauntVY;
+        if (wall.intersects())
     }
         public class MyMouseMotionListener implements MouseMotionListener {
 
@@ -173,51 +159,45 @@ public class AnimationUppgift extends Canvas implements Runnable {
             }
         }
 
-        public class MyKeyListener implements KeyListener {
+    public class MyKeyListener implements KeyListener {
 
-            @Override
-            public void keyTyped(KeyEvent e) {
+        @Override
+        public void keyTyped(KeyEvent e) {
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyChar() == 'a') {
+                HauntVX = -3;
             }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
+            if (e.getKeyChar() == 'd') {
+                HauntVX = 3;
             }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
+            if (e.getKeyChar() == 'w') {
+                HauntVY = -3;
+            }
+            if (e.getKeyChar() == 's') {
+                HauntVY = 3;
             }
         }
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == 'a') {
-            HauntVX = -3;
-        }
-        if (e.getKeyChar() == 'd') {
-            HauntVX = 3;
-        }
-        if (e.getKeyChar() == 'w') {
-            HauntVY = -3;
-        }
-        if (e.getKeyChar() == 's') {
-            HauntVY = 3;
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyChar() == 'a') {
-            HauntVX = 0;
-        }
-        if (e.getKeyChar() == 'd') {
-            HauntVX = 0;
-        }
-        if (e.getKeyChar() == 'w') {
-            HauntVY = 0;
-        }
-        if (e.getKeyChar() == 's') {
-            HauntVY = 0;
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if (e.getKeyChar() == 'a') {
+                HauntVX = 0;
+            }
+            if (e.getKeyChar() == 'd') {
+                HauntVX = 0;
+            }
+            if (e.getKeyChar() == 'w') {
+                HauntVY = 0;
+            }
+            if (e.getKeyChar() == 's') {
+                HauntVY = 0;
+            }
         }
     }
 }
+
+
 
 

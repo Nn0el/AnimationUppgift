@@ -11,3 +11,6 @@ kommer styra men är inte riktigt klar med den än.
 
 2023-02-17 Fixat errors och lagt in spöket och har börjat på koden som
 får spöket att kunna röra sig
+
+2023-02-24 spöket kan nu röra sig men jag har nu insett att min hitbox inte är klar
+så jag har påbörjat att fixa en fungerande hitbox. 
