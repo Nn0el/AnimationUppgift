@@ -20,12 +20,16 @@ public class AnimationUppgift extends Canvas implements Runnable {
     int x = 0;
     int y = 0;
     Rectangle wall = new Rectangle(225, 175, 160, 80);
+    Rectangle HauntHitbox;
     private BufferedImage Haunt;
-    private int HauntX = 100;
-    private int HauntY = 100;
+    //private int HauntX = 100;
+    //private int HauntY = 100;
     private int HauntVX = 0;
     private int HauntVY = 0;
-
+     //private int  HitboxX=100;
+     //private int HitboxY=100;
+     private int HitboxVY=0;
+     private int HitboxVX=0;
 
 
     public AnimationUppgift() {
@@ -36,6 +40,7 @@ public class AnimationUppgift extends Canvas implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        HauntHitbox = new Rectangle(100,100,Haunt.getWidth()/8, Haunt.getHeight()/8);
         setSize(600, 400);
         JFrame frame = new JFrame();
         frame.add(this);
@@ -68,13 +73,14 @@ public class AnimationUppgift extends Canvas implements Runnable {
 
     public void draw(Graphics g) {
         g.clearRect(0, 0, getWidth(), getHeight());
-        g.clearRect(Haunt, HauntX, HauntY, Haunt.getWidth()/8, Haunt.getHeight()/8, );
+
         g.fillRect(0, 0, 600, 60);
         g.fillRect(0, 350, 600, 60);
         g.fillRect(0, 0, 60, 350);
         g.fillRect(540, 0, 60, 350);
         g.fillRect(225, 175, 160, 80);
-        g.drawImage(Haunt, HauntX, HauntY, Haunt.getWidth() / 8, Haunt.getHeight() / 8, null);
+        g.drawImage(Haunt, HauntHitbox.x, HauntHitbox.y, Haunt.getWidth() / 8, Haunt.getHeight() / 8, null);
+    //    g.clearRect(Hitbox, HitboxX, HitboxY, Hitbox.getWidth() / 8, Hitbox.getHeight() / 8);
     }
 
 
@@ -121,9 +127,11 @@ public class AnimationUppgift extends Canvas implements Runnable {
 
 
     private void update() {
-        HauntX += HauntVX;
-        HauntY += HauntVY;
-        if (wall.intersects())
+        HauntHitbox.x += HauntVX;
+        HauntHitbox.y += HauntVY;
+         if (wall.intersects(HauntHitbox)) {
+
+         }
     }
         public class MyMouseMotionListener implements MouseMotionListener {
 
@@ -169,12 +177,16 @@ public class AnimationUppgift extends Canvas implements Runnable {
         public void keyPressed(KeyEvent e) {
             if (e.getKeyChar() == 'a') {
                 HauntVX = -3;
+                HitboxVX = -3;
             }
             if (e.getKeyChar() == 'd') {
                 HauntVX = 3;
+                HitboxVX = 3;
+
             }
             if (e.getKeyChar() == 'w') {
                 HauntVY = -3;
+                HitboxVY = -3;
             }
             if (e.getKeyChar() == 's') {
                 HauntVY = 3;
@@ -184,15 +196,19 @@ public class AnimationUppgift extends Canvas implements Runnable {
         public void keyReleased(KeyEvent e) {
             if (e.getKeyChar() == 'a') {
                 HauntVX = 0;
+                HitboxVX = 0;
             }
             if (e.getKeyChar() == 'd') {
                 HauntVX = 0;
+                HitboxVX = 0;
             }
             if (e.getKeyChar() == 'w') {
                 HauntVY = 0;
+                HitboxVY = 0;
             }
             if (e.getKeyChar() == 's') {
                 HauntVY = 0;
+                HitboxVY = 0;
             }
         }
     }

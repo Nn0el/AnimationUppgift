@@ -14,3 +14,6 @@ får spöket att kunna röra sig
 
 2023-02-24 spöket kan nu röra sig men jag har nu insett att min hitbox inte är klar
 så jag har påbörjat att fixa en fungerande hitbox. 
+
+2023-02-28 Hitboxen är fixad förutom själva saken som händer när
+man kolliderar med hitboxen. 
