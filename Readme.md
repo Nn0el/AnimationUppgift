@@ -17,3 +17,5 @@ så jag har påbörjat att fixa en fungerande hitbox.
 
 2023-02-28 Hitboxen är fixad förutom själva saken som händer när
 man kolliderar med hitboxen. 
+
+2023-03-03 Hitboxen i mitten är nu helt fungerande och jag har lagt ut programmet på en webbsida. 

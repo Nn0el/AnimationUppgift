@@ -34,7 +34,7 @@ public class AnimationUppgift extends Canvas implements Runnable {
 
     public AnimationUppgift() {
         try {
-            Haunt = ImageIO.read(new File("PixelHaunter.png"));
+            Haunt = ImageIO.read(getClass().getResource("PixelHaunter.png"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -130,8 +130,12 @@ public class AnimationUppgift extends Canvas implements Runnable {
         HauntHitbox.x += HauntVX;
         HauntHitbox.y += HauntVY;
          if (wall.intersects(HauntHitbox)) {
-
+             HauntHitbox.x -= HauntVX;
+             HauntHitbox.y -= HauntVY;
+             HauntVX = 0;
+             HauntVY = 0;
          }
+
     }
         public class MyMouseMotionListener implements MouseMotionListener {
 
